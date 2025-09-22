@@ -70,19 +70,18 @@ const Dashboard = () => {
 
   return (
     <Box>
-      <Box display="flex" justifyContent="space-between" alignItems="center" mb={3}>
-        <Box>
-          <Typography variant="h4" component="h1" gutterBottom>
-            Welcome back, {user?.name}!
-          </Typography>
-          <Typography variant="subtitle1" color="text.secondary">
-            Manage your children's schedules and track their progress
-          </Typography>
-        </Box>
+      <Box mb={3}>
+        <Typography variant="h4" component="h1" gutterBottom>
+          Welcome back, {user?.name}!
+        </Typography>
+        <Typography variant="subtitle1" color="text.secondary" gutterBottom>
+          Manage your children's schedules and track their progress
+        </Typography>
         <Button
           variant="outlined"
           onClick={logout}
           size="small"
+          sx={{ mt: 1 }}
         >
           Logout
         </Button>

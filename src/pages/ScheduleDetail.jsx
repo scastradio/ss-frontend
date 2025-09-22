@@ -454,19 +454,19 @@ const ScheduleDetail = () => {
         `}
       </style>
 
-      <Box display="flex" alignItems="center" mb={3}>
-        <IconButton onClick={() => navigate(`/children/${schedule.child.id}`)} sx={{ mr: 2 }}>
-          <ArrowBack />
-        </IconButton>
-        <Box flexGrow={1}>
-          <Typography variant="h4" component="h1" gutterBottom>
+      <Box mb={3}>
+        <Box display="flex" alignItems="center" mb={1}>
+          <IconButton onClick={() => navigate(`/children/${schedule.child.id}`)} sx={{ mr: 2 }}>
+            <ArrowBack />
+          </IconButton>
+          <Typography variant="h4" component="h1">
             {schedule.title}
           </Typography>
-          <Typography variant="subtitle1" color="text.secondary">
-            {schedule.child.name}'s Schedule
-          </Typography>
         </Box>
-        <Box display="flex" gap={2}>
+        <Typography variant="subtitle1" color="text.secondary" gutterBottom sx={{ ml: 7 }}>
+          {schedule.child.name}'s Schedule
+        </Typography>
+        <Box display="flex" gap={2} sx={{ ml: 7 }}>
           <Button
             variant="outlined"
             startIcon={<Print />}

@@ -187,13 +187,33 @@ const Children = () => {
 
   return (
     <Box>
-      <Box display="flex" alignItems="center" mb={3}>
-        <IconButton onClick={() => navigate('/dashboard')} sx={{ mr: 2 }}>
-          <ArrowBack />
-        </IconButton>
-        <Typography variant="h4" component="h1">
-          Children
+      <Box mb={3}>
+        <Box display="flex" alignItems="center" mb={1}>
+          <IconButton onClick={() => navigate('/dashboard')} sx={{ mr: 2 }}>
+            <ArrowBack />
+          </IconButton>
+          <Typography variant="h4" component="h1">
+            Children
+          </Typography>
+        </Box>
+        <Typography variant="subtitle1" color="text.secondary" gutterBottom sx={{ ml: 7 }}>
+          Manage your children's profiles and schedules
         </Typography>
+        <Box sx={{ ml: 7 }}>
+          <Button
+            variant="contained"
+            startIcon={<Add />}
+            onClick={() => handleOpenDialog()}
+            sx={{
+              bgcolor: 'primary.light',
+              '&:hover': {
+                bgcolor: 'primary.main'
+              }
+            }}
+          >
+            Add Child
+          </Button>
+        </Box>
       </Box>
 
       {error && (
@@ -201,22 +221,6 @@ const Children = () => {
           {error}
         </Alert>
       )}
-
-      <Box display="flex" justifyContent="flex-end" mb={3}>
-        <Button
-          variant="contained"
-          startIcon={<Add />}
-          onClick={() => handleOpenDialog()}
-          sx={{
-            bgcolor: 'primary.light',
-            '&:hover': {
-              bgcolor: 'primary.main'
-            }
-          }}
-        >
-          Add Child
-        </Button>
-      </Box>
 
       <Grid container spacing={3}>
         {children.map((child) => (
