@@ -7,10 +7,9 @@ export default defineConfig(({ mode }) => {
   const isDev = mode === 'development'
   const apiTarget = isDev ? 'http://localhost:3001' : 'https://ss.bot.prnt.gg'
   
-  // Base URL for production - should match your deployment URL
+    // Base URL for production - should match your deployment URL
   const base = isDev ? '/' : '/'
   
-
   return {
   plugins: [
     react(),
