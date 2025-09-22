@@ -5,12 +5,9 @@
       "src": "package.json",
       "use": "@vercel/static-build",
       "config": {
-        "distDir": "dist"
+        "distDir": "dist",
+        "buildCommand": "npm run build"
       }
-    },
-    {
-      "src": "src/pages/api/health.js",
-      "use": "@vercel/node"
     }
   ],
   "routes": [
@@ -23,11 +20,7 @@
       "dest": "https://ss.bot.prnt.gg/uploads/$1"
     },
     {
-      "src": "/api/health",
-      "dest": "https://ss.bot.prnt.gg/api/health"
-    },
-    {
-      "src": "/(.*\\.(?:js|mjs|jsx|ts|tsx|css|json|svg|png|jpg|jpeg|gif|ico|woff|woff2|ttf|eot))",
+      "src": "/(.*\\.(?:js|css|json|svg|png|jpg|jpeg|gif|ico|woff|woff2|ttf|eot))",
       "headers": {
         "cache-control": "public, max-age=31536000, immutable"
       },
@@ -70,7 +63,7 @@
       ]
     },
     {
-      "source": "/(.*\\.(?:js|mjs|jsx|ts|tsx))",
+      "source": "/(.*\\.js)",
       "headers": [
         {
           "key": "Content-Type",
@@ -90,8 +83,7 @@
   ],
   "env": {
     "VITE_API_URL": "https://ss.bot.prnt.gg",
-    "VITE_APP_NAME": "Sensory Smiles",
-    "VITE_APP_DESCRIPTION": "Visual scheduling app for children with sensory needs"
+    "NODE_ENV": "production"
   },
   "build": {
     "env": {
