@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Debug - Sensory Smiles</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f5f5f5;
+        }
+        .debug-container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .test-result {
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 4px;
+        }
+        .success { background-color: #e8f5e9; color: #2e7d32; }
+        .error { background-color: #ffebee; color: #c62828; }
+        .info { background-color: #e3f2fd; color: #1976d2; }
+        button {
+            background-color: #1976d2;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        button:hover { background-color: #1565c0; }
+        pre { background: #f0f0f0; padding: 10px; border-radius: 4px; overflow-x: auto; }
+    </style>
+</head>
+<body>
+    <div class="debug-container">
+        <h1>Sensory Smiles Debug Page</h1>
+        <p>This page helps debug issues with the main application.</p>
+        
+        <div id="results"></div>
+        
+        <button onclick="testLocalStorage()">Check LocalStorage</button>
+        <button onclick="testAPI()">Test API Connection</button>
+        <button onclick="testAuth()">Test Authentication</button>
+        <button onclick="clearStorage()">Clear LocalStorage</button>
+        <button onclick="goToDashboard()">Go to Dashboard</button>
+        <button onclick="goToLogin()">Go to Login</button>
+    </div>
+
+    <script>
+        const results = document.getElementById('results');
+        
+        function addResult(message, type = 'info') {
+            const div = document.createElement('div');
+            div.className = `test-result ${type}`;
+            div.innerHTML = message;
+            results.appendChild(div);
+        }
+        
+        function testLocalStorage() {
+            addResult('<h3>LocalStorage Test</h3>');
+            try {
+                const user = localStorage.getItem('user');
+                const token = localStorage.getItem('token');
+                
+                addResult(`User in localStorage: ${user ? 'Found' : 'Not found'}`, user ? 'success' : 'error');
+                addResult(`Token in localStorage: ${token ? 'Found' : 'Not found'}`, token ? 'success' : 'error');
+                
+                if (user) {
+                    try {
+                        const userObj = JSON.parse(user);
+                        addResult(`<pre>User object: ${JSON.stringify(userObj, null, 2)}</pre>`, 'info');
+                    } catch (e) {
+                        addResult(`Error parsing user object: ${e.message}`, 'error');
+                    }
+                }
+                
+                if (token) {
+                    addResult(`<pre>Token: ${token.substring(0, 50)}...</pre>`, 'info');
+                }
+            } catch (e) {
+                addResult(`LocalStorage error: ${e.message}`, 'error');
+            }
+        }
+        
+        function testAPI() {
+            addResult('<h3>API Connection Test</h3>');
+            fetch('https://ss.bot.prnt.gg/api/health')
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    addResult('API Health Check: Success', 'success');
+                    addResult(`<pre>Response: ${JSON.stringify(data, null, 2)}</pre>`, 'info');
+                })
+                .catch(error => {
+                    addResult(`API Health Check Failed: ${error.message}`, 'error');
+                });
+        }
+        
+        function testAuth() {
+            addResult('<h3>Authentication Test</h3>');
+            const token = localStorage.getItem('token');
+            
+            if (!token) {
+                addResult('No token found - user not authenticated', 'error');
+                return;
+            }
+            
+            fetch('https://ss.bot.prnt.gg/api/children', {
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                addResult('Authenticated API call: Success', 'success');
+                addResult(`Found ${Array.isArray(data) ? data.length : 'unknown'} children`, 'info');
+            })
+            .catch(error => {
+                addResult(`Authenticated API call failed: ${error.message}`, 'error');
+                if (error.message.includes('401')) {
+                    addResult('Token appears to be invalid or expired', 'error');
+                }
+            });
+        }
+        
+        function clearStorage() {
+            localStorage.clear();
+            addResult('LocalStorage cleared', 'success');
+        }
+        
+        function goToDashboard() {
+            window.location.href = '/dashboard';
+        }
+        
+        function goToLogin() {
+            window.location.href = '/login';
+        }
+        
+        // Auto-run basic tests on page load
+        window.onload = function() {
+            addResult('<h2>Auto-running basic tests...</h2>');
+            testLocalStorage();
+            setTimeout(testAPI, 1000);
+        };
+    </script>
+</body>
+</html>
