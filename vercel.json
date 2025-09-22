@@ -1,0 +1,47 @@
+{
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
+  "devCommand": "npm run dev",
+  "installCommand": "npm install",
+  "framework": "vite",
+  "rewrites": [
+    {
+      "source": "/api/(.*)",
+      "destination": "https://ss.bot.prnt.gg/api/$1"
+    },
+    {
+      "source": "/uploads/(.*)",
+      "destination": "https://ss.bot.prnt.gg/uploads/$1"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/api/(.*)",
+      "headers": [
+        {
+          "key": "Access-Control-Allow-Origin",
+          "value": "*"
+        },
+        {
+          "key": "Access-Control-Allow-Methods",
+          "value": "GET, POST, PUT, DELETE, OPTIONS"
+        },
+        {
+          "key": "Access-Control-Allow-Headers",
+          "value": "X-Requested-With, Content-Type, Accept, Authorization"
+        }
+      ]
+    }
+  ],
+  "functions": {
+    "app/api/health.js": {
+      "maxDuration": 10
+    }
+  },
+  "regions": ["fra1"],
+  "env": {
+    "VITE_API_URL": "https://ss.bot.prnt.gg",
+    "VITE_APP_NAME": "Sensory Smiles",
+    "VITE_APP_DESCRIPTION": "Visual scheduling app for children with sensory needs"
+  }
+}

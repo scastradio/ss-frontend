@@ -1,0 +1,42 @@
+{
+  "name": "sensory-smiles-frontend",
+  "version": "1.0.0",
+  "description": "Frontend PWA for Sensory Smiles - Visual Schedule App",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "test": "vitest"
+  },
+  "keywords": [
+    "react",
+    "pwa",
+    "vite",
+    "frontend"
+  ],
+  "author": "Visual Schedule App Team",
+  "license": "MIT",
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.20.1",
+    "@mui/material": "^5.15.0",
+    "@mui/icons-material": "^5.15.0",
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
+    "axios": "^1.6.2",
+    "date-fns": "^3.0.6",
+    "workbox-webpack-plugin": "^7.0.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.39",
+    "@types/react-dom": "^18.2.17",
+    "@vitejs/plugin-react": "^4.2.0",
+    "vite": "^5.0.7",
+    "vitest": "^1.0.4",
+    "@testing-library/react": "^14.1.2",
+    "@testing-library/jest-dom": "^6.1.5",
+    "vite-plugin-pwa": "^0.17.4"
+  }
+}
