@@ -26,6 +26,30 @@
       }
     },
     {
+      "src": "/registerSW.js",
+      "dest": "/registerSW.js",
+      "headers": {
+        "Content-Type": "application/javascript",
+        "Cache-Control": "no-cache, no-store, must-revalidate"
+      }
+    },
+    {
+      "src": "/manifest.json",
+      "dest": "/manifest.json",
+      "headers": {
+        "Content-Type": "application/json",
+        "Cache-Control": "public, max-age=0, must-revalidate"
+      }
+    },
+    {
+      "src": "/workbox-(.*).js",
+      "dest": "/workbox-$1.js",
+      "headers": {
+        "Content-Type": "application/javascript",
+        "Cache-Control": "no-cache, no-store, must-revalidate"
+      }
+    },
+    {
       "src": "/sw.js",
       "headers": {
         "Cache-Control": "no-cache, no-store, must-revalidate",
