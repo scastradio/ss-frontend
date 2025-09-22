@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Tooltip, 
+import {
   Box,
   Typography,
   Grid,
@@ -8,11 +8,12 @@ import { Tooltip,
   Button,
   Chip,
   CircularProgress,
-  Alert
+  Alert,
+  Tooltip
 } from '@mui/material'
-import { Tooltip,  Add, Person, Schedule } from '@mui/icons-material'
-import { Tooltip,  useNavigate } from 'react-router-dom'
-import { Tooltip,  useAuth } from '../contexts/AuthContext'
+import { Add, Person, Schedule } from '@mui/icons-material'
+import { useNavigate } from 'react-router-dom'
+import { useAuth } from '../contexts/AuthContext'
 import api from '../services/api'
 
 const Dashboard = () => {
