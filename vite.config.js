@@ -6,6 +6,10 @@ import { VitePWA } from 'vite-plugin-pwa'
 export default defineConfig(({ mode }) => {
   const isDev = mode === 'development'
   const apiTarget = isDev ? 'http://localhost:3001' : 'https://ss.bot.prnt.gg'
+  
+  // Base URL for production - should match your deployment URL
+  const base = isDev ? '/' : '/'
+  
 
   return {
   plugins: [
@@ -41,13 +45,17 @@ export default defineConfig(({ mode }) => {
       }
     })
   ],
+  base,
   server: {
     port: 5173,
+    strictPort: true,
+    open: isDev,
     proxy: {
       '/api': {
         target: apiTarget,
         changeOrigin: true,
-        secure: !isDev
+        secure: !isDev,
+        rewrite: (path) => path.replace(/^\/api/, '')
       },
       '/uploads': {
         target: apiTarget,
