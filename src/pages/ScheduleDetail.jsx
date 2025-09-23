@@ -38,6 +38,7 @@ import {
 } from '@mui/icons-material'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useAuth } from '../contexts/AuthContext'
+import LazyImage from '../components/LazyImage'
 import api from '../services/api'
 import { convertFileToBase64, isValidImageFile } from '../utils/imageUtils'
 
@@ -550,12 +551,12 @@ const ScheduleDetail = () => {
 
                   {task.image && (
                     <Box sx={{ mr: 2 }}>
-                      <img
+                      <LazyImage
                         src={task.image}
                         alt={task.title}
                         style={{
-                          width: 48,
-                          height: 48,
+                          width: 40,
+                          height: 40,
                           borderRadius: 4,
                           objectFit: 'cover'
                         }}
@@ -670,7 +671,7 @@ const ScheduleDetail = () => {
                 )}
               </Box>
               {task.image && (
-                <img
+                <LazyImage
                   src={task.image}
                   alt={task.title}
                   className="print-task-image"
@@ -768,7 +769,7 @@ const ScheduleDetail = () => {
 
             {formData.image && (
               <Box sx={{ mt: 1 }}>
-                <img
+                <LazyImage
                   src={formData.image}
                   alt="Task image preview"
                   style={{
@@ -814,7 +815,7 @@ const ScheduleDetail = () => {
                           }}
                           onClick={() => handlePredefinedImageSelect(image)}
                         >
-                          <img
+                          <LazyImage
                             src={image.imageData}
                             alt={image.name}
                             style={{
@@ -823,6 +824,8 @@ const ScheduleDetail = () => {
                               objectFit: 'contain',
                               borderRadius: 4,
                             }}
+                            threshold={0.1}
+                            rootMargin="100px"
                           />
                           <Typography variant="caption" sx={{ display: 'block', mt: 0.5, fontSize: '0.7rem' }}>
                             {image.name}
@@ -889,7 +892,7 @@ const ScheduleDetail = () => {
 
             {editFormData.image && (
               <Box sx={{ mt: 1 }}>
-                <img
+                <LazyImage
                   src={editFormData.image}
                   alt="Task image preview"
                   style={{

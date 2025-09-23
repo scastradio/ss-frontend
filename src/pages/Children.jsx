@@ -1,26 +1,39 @@
 import React, { useState, useEffect } from 'react'
 import {
   Box,
+  Container,
   Typography,
-  Button,
+  Paper,
+  Grid,
   Card,
   CardContent,
+  IconButton,
+  Button,
   Dialog,
   DialogTitle,
   DialogContent,
   DialogActions,
   TextField,
-  IconButton,
-  Grid,
-  Chip,
-  CircularProgress,
   Alert,
-  Snackbar,
-  Tooltip
+  Chip,
+  AppBar,
+  Toolbar,
+  CircularProgress,
+  Fab,
+  Avatar
 } from '@mui/material'
-import { Add, Edit, Delete, ArrowBack, Link as LinkIcon, ContentCopy } from '@mui/icons-material'
+import {
+  ArrowBack,
+  Delete,
+  Edit,
+  Add,
+  Person,
+  CloudUpload,
+  Visibility
+} from '@mui/icons-material'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../contexts/AuthContext'
+import LazyImage from '../components/LazyImage'
 import api from '../services/api'
 import { convertFileToBase64, isValidImageFile } from '../utils/imageUtils'
 
@@ -374,20 +387,23 @@ const Children = () => {
                 shrink: true,
               }}
             />
+            
             {formData.avatar && (
               <Box sx={{ mt: 1 }}>
-                <img
+                <LazyImage
                   src={formData.avatar}
                   alt="Avatar preview"
                   style={{
                     width: 100,
                     height: 100,
                     borderRadius: '50%',
-                    objectFit: 'cover'
+                    objectFit: 'cover',
+                    border: '2px solid #ddd'
                   }}
                 />
               </Box>
             )}
+
             <TextField
               fullWidth
               label="Theme Color (optional)"

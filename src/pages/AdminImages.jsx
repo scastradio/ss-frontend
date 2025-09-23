@@ -36,6 +36,7 @@ import {
 } from '@mui/icons-material'
 import { useNavigate } from 'react-router-dom'
 import { useAdmin } from '../contexts/AdminContext'
+import LazyImage from '../components/LazyImage'
 
 const AdminImages = () => {
   const [images, setImages] = useState([])
@@ -298,12 +299,15 @@ const AdminImages = () => {
               {categoryImages.map((image) => (
                 <Grid item xs={12} sm={6} md={4} lg={3} key={image.id}>
                   <Card>
-                    <CardMedia
-                      component="img"
-                      height="120"
-                      image={image.imageData}
+                    <LazyImage
+                      src={image.imageData}
                       alt={image.name}
-                      sx={{ objectFit: 'contain', bgcolor: '#f5f5f5' }}
+                      style={{
+                        width: '100%',
+                        height: 120,
+                        objectFit: 'contain',
+                        backgroundColor: '#f5f5f5'
+                      }}
                     />
                     <CardContent sx={{ p: 1.5 }}>
                       <Typography variant="subtitle2" noWrap>

@@ -2,22 +2,34 @@ import React, { useState, useEffect } from 'react'
 import {
   Box,
   Typography,
+  Button,
   Card,
   CardContent,
-  IconButton,
   Grid,
+  Chip,
   CircularProgress,
   Alert,
   Container,
   AppBar,
-  Toolbar
+  Toolbar,
+  IconButton,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
+  Avatar
 } from '@mui/material'
 import {
+  ArrowBack,
   CheckCircle,
-  RadioButtonUnchecked
+  RadioButtonUnchecked,
+  ThumbUp,
+  Refresh
 } from '@mui/icons-material'
-import { useParams } from 'react-router-dom'
-import axios from 'axios'
+import { useNavigate, useParams } from 'react-router-dom'
+import { useAuth } from '../contexts/AuthContext'
+import LazyImage from '../components/LazyImage'
+import api from '../services/api'
 
 const ChildView = () => {
   const { token } = useParams()
@@ -87,14 +99,16 @@ const ChildView = () => {
           </Typography>
           {child.avatar && (
             <Box sx={{ ml: 2 }}>
-              <img
+              <LazyImage
                 src={child.avatar}
                 alt={child.name}
                 style={{
-                  width: 40,
-                  height: 40,
+                  width: 60,
+                  height: 60,
                   borderRadius: '50%',
-                  objectFit: 'cover'
+                  objectFit: 'cover',
+                  border: '3px solid #fff',
+                  boxShadow: '0 2px 8px rgba(0,0,0,0.1)'
                 }}
               />
             </Box>
@@ -243,7 +257,7 @@ const ChildView = () => {
                                 {/* Large Image at Top */}
                                 {task.image ? (
                                   <Box sx={{ mb: 2 }}>
-                                    <img
+                                    <LazyImage
                                       src={task.image}
                                       alt={task.title}
                                       style={{
