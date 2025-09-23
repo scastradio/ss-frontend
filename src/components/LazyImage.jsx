@@ -23,6 +23,13 @@ const LazyImage = ({
     
     if (!currentImg) return
 
+    // Check if IntersectionObserver is supported
+    if (typeof IntersectionObserver === 'undefined') {
+      // Fallback: load image immediately if IntersectionObserver is not supported
+      setIsInView(true)
+      return
+    }
+
     // Create intersection observer
     observerRef.current = new IntersectionObserver(
       (entries) => {
@@ -30,7 +37,9 @@ const LazyImage = ({
         if (entry.isIntersecting) {
           setIsInView(true)
           // Disconnect observer once image is in view
-          observerRef.current?.disconnect()
+          if (observerRef.current) {
+            observerRef.current.disconnect()
+          }
         }
       },
       {
@@ -44,7 +53,9 @@ const LazyImage = ({
 
     // Cleanup
     return () => {
-      observerRef.current?.disconnect()
+      if (observerRef.current) {
+        observerRef.current.disconnect()
+      }
     }
   }, [threshold, rootMargin])
 
