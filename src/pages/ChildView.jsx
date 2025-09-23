@@ -44,7 +44,7 @@ const ChildView = () => {
   const fetchChildData = async () => {
     try {
       setLoading(true)
-      const response = await axios.get(`/api/children/magic/${token}`)
+      const response = await api.get(`/children/magic/${token}`)
       setChild(response.data.child)
     } catch (err) {
       console.error('Failed to fetch child data:', err)
@@ -56,7 +56,7 @@ const ChildView = () => {
 
   const handleTaskUpdate = async (taskId, childMarkedDone) => {
     try {
-      await axios.put(`/api/children/magic/${token}/tasks/${taskId}`, {
+      await api.put(`/children/magic/${token}/tasks/${taskId}`, {
         childMarkedDone
       })
       // Refresh child data to show updated task status
