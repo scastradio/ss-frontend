@@ -55,7 +55,7 @@ export default defineConfig(({ mode }) => {
             },
           ],
         },
-        includeAssets: ['favicon.ico', 'apple-touch-icon.png', 'masked-icon.svg'],
+        includeAssets: ['favicon-16x16.png', 'favicon-32x32.png', 'apple-touch-icon.png', 'icons/*.png'],
         manifest: {
           name: 'Sensory Smiles - Visual Schedule App',
           short_name: 'Sensory Smiles',
@@ -66,7 +66,18 @@ export default defineConfig(({ mode }) => {
           orientation: 'portrait',
           scope: '/',
           start_url: '/',
-          icons: [],
+          icons: [
+            {
+              src: '/icons/icon-192x192.png',
+              sizes: '192x192',
+              type: 'image/png'
+            },
+            {
+              src: '/icons/icon-512x512.png',
+              sizes: '512x512',
+              type: 'image/png'
+            }
+          ],
         },
       }),
     ],
